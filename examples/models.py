@@ -65,7 +65,7 @@ class LdapUser(ldapdb.models.Model):
     latitude = FloatField(db_column='latitude', blank=True)
 
     def __str__(self):
-        return self.username
+        return str(self.username, 'utf-8')
 
     def __unicode__(self):
         return self.full_name
@@ -85,7 +85,7 @@ class LdapGroup(ldapdb.models.Model):
     usernames = ListField(db_column='memberUid')
 
     def __str__(self):
-        return self.name
+        return str(self.name, 'utf-8')
 
     def __unicode__(self):
         return self.name
