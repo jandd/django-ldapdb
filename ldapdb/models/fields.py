@@ -157,10 +157,9 @@ class FloatField(fields.FloatField):
 
 
 class ListField(fields.Field):
-    __metaclass__ = SubfieldBase
-    # TODO: SubfieldBase was deprecated in 1.8, will be removed in 1.10.
-    # Switch to using Field.from_db_value() per docs.
-    # https://docs.djangoproject.com/en/1.8/howto/custom-model-fields/#converting-values-to-python-objects
+
+    def from_db_value(self, value, expression, connection, context):
+        return self.from_ldap(value, connection)
 
     def from_ldap(self, value, connection):
         return [x.decode(connection.charset) for x in value]
